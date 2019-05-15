@@ -14,7 +14,7 @@ insert into ville SELECT row_number() over(), ville FROM (SELECT DISTINCT ville 
 																					 )as unionVilles
 														 ) as distinctUnionVilles ;
 														 
---rempli etablissement														 
+--rempli etablissement
 insert into etablissement SELECT row_number() over(), RNE, etablissement.nom, ville.idville from tmp.etablissement, ville 
 where ville.nom = tmp.etablissement.localite;
 
