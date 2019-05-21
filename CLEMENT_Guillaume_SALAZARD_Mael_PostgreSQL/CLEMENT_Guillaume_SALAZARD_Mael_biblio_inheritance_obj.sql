@@ -240,6 +240,14 @@ CREATE TRIGGER ce_res_hab_up
 BEFORE UPDATE ON habitant
 FOR EACH ROW EXECUTE PROCEDURE test_foreign_residence_up () ;
 
+CREATE TRIGGER ce_res_abo_del
+BEFORE DELETE ON abonne
+FOR EACH ROW EXECUTE PROCEDURE test_foreign_residence_delete () ;
+
+CREATE TRIGGER ce_res_abo_up
+BEFORE UPDATE ON abonne
+FOR EACH ROW EXECUTE PROCEDURE test_foreign_residence_up () ;
+
 -- abbonnement
 
 CREATE OR REPLACE FUNCTION test_foreign_abonnement_insert () 
@@ -295,11 +303,11 @@ CREATE TRIGGER ce_res_abo
 BEFORE INSERT OR UPDATE ON abonnement
 FOR EACH ROW EXECUTE PROCEDURE test_foreign_abonnement_insert () ;
 
-CREATE TRIGGER ce_res_abo_del
+CREATE TRIGGER ce_abo_abo_del
 BEFORE DELETE ON abonne
 FOR EACH ROW EXECUTE PROCEDURE test_foreign_abonnement_delete () ;
 
-CREATE TRIGGER ce_res_abo_up
+CREATE TRIGGER ce_abo_abo_up
 BEFORE UPDATE ON abonne
 FOR EACH ROW EXECUTE PROCEDURE test_foreign_abonnement_up () ;
 
