@@ -1,0 +1,50 @@
+--requete objet
+
+select numeroabonne, reduction, abonne.idpersonnephysique, tarif,  abonne.nom,  abonne.prenom, age 
+from abonne, abonnement, bibliotheque
+where bibliotheque.nom = 'VICTOR HUGO' 
+AND bibliotheque.idbibliotheque = abonnement.idbibliotheque
+AND abonnement.idpersonnephysique = abonne.idpersonnephysique;
+
+--requete relationnelle
+
+select numeroabonne, reduction, abonne.idpersonnephysique, tarif, personnephysique.nom, personnephysique.prenom, age 
+from abonne, abonnement, bibliotheque, habitant, personnephysique
+where bibliotheque.nom = 'VICTOR HUGO' 
+AND bibliotheque.idbibliotheque = abonnement.idbibliotheque
+AND abonnement.idpersonnephysique = abonne.idpersonnephysique
+AND abonne.idpersonnephysique = habitant.idpersonnephysique
+AND personnephysique.idpersonnephysique = habitant.idpersonnephysique;
+
+/* ------------- Explications ----------------------
+
+ ------------- Objet ------------
+ ----- Avantages -----
+
+Les requêtes sont plus intuitives et correspondent aux diagrammes de classes.
+
+ ----- Inconvenients -----
+
+Les contraintes d'integrités ne peuvent pas marcher, vu qu'elles se mettent à dependre de plusieurs tables. 
+On doit utiliser des triggers à la place.
+Le systeme d'héritage depend du SGBD choisi.
+
+ ----- Pourquoi les contraintes ne marchent pas -----
+
+Les contraintes d'integrités sont exercées sur une seule table,
+ce qui fait qu'on ne peut pas verifier que les données de cette table, 
+et non les tables héritées et dont on hérite. 
+Cela est different d'un select * from table, qui montre une vue de toutes les données de toutes les tables héritées,
+et dont il pourra donc y avoir des doublons.
+
+ ------------- Relationnelle ------------
+ ----- Avantages -----
+
+Cela est compatible a toutes les SGBD SQL.
+Il n'y a pas besoin de triggers pour maintenir les contraintes.
+
+ ----- Inconvenients -----
+Les informations sont fractionnées entre plusieurs tables, et les requetes sont moins intuitives/plus complexes
+
+
+*/
